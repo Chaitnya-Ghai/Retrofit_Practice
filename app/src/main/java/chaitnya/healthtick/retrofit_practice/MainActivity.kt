@@ -33,9 +33,9 @@ class MainActivity : ComponentActivity() {
 
                 LaunchedEffect(Unit) {
                     try {
-                        val apiResponse = apiService.getPosts()
-                        apiResult = apiResponse.body()?.string()
-                        Log.d("TAG", "onCreate: $apiResult")
+                        val apiResponse = apiService.deletePost(1)
+                        apiResult = " Response: "+apiResponse.body().toString().plus("  &  Status Code: ").plus(apiResponse.code())
+                        Log.d("TAG", "onCreate: ${apiResponse.code()}")
                     } catch (e: Exception) {
                         errorMessage = e.message
                     }
