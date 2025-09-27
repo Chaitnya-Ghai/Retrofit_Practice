@@ -1,11 +1,8 @@
 package chaitnya.healthtick.retrofit_practice
 
 import chaitnya.healthtick.retrofit_practice.model.PostResponseItem
-import okhttp3.ResponseBody
-import retrofit2.Response
 import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.PATCH
 import retrofit2.http.PUT
 import retrofit2.http.Path
 
@@ -25,5 +22,13 @@ interface ApiService {
         @Body post: PostResponseItem,
         @Path("userId")userId : Int
     ) : PostResponseItem
+//---------------------------------------------------------------
+    @PATCH("posts/{userId}")
+    suspend fun patch(
+        @Body postField : Map<String, String>,//as json is = key-value pair
+        @Path("userId")userId : Int
+    ) : PostResponseItem
+
+
 
 }

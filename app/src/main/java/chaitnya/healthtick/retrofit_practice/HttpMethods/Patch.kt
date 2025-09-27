@@ -16,10 +16,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import chaitnya.healthtick.retrofit_practice.model.PostResponseItem
 
-
 @Composable
-fun PutComposable(
-    putData: suspend () -> PostResponseItem,
+fun PatchComposable(
+    patchData: suspend () -> PostResponseItem,
     modifier: Modifier = Modifier
 ) {
     var apiResult by remember { mutableStateOf<PostResponseItem?>(null) }
@@ -28,7 +27,7 @@ fun PutComposable(
 
     LaunchedEffect(Unit) {
         try {
-            val response = putData() // returns PostResponseItem directly
+            val response = patchData() // returns PostResponseItem directly
             apiResult = response
         } catch (e: Exception) {
             errorMessage = e.message ?: "Unknown error"
@@ -44,31 +43,10 @@ fun PutComposable(
         when {
             isLoading -> CircularProgressIndicator()
             apiResult != null -> Text(
-                text = "Updated Put: ${apiResult!!.title}\n${apiResult!!.body}",
+                text = "Updated Patch title : ${apiResult!!.title}\n of id:${apiResult!!.id}",
                 textAlign = TextAlign.Center
             )
             errorMessage != null -> Text(errorMessage!!, color = Color.Red)
         }
     }
 }
-
-/**
- * CASE 1: Unknown / Raw Response
- * --------------------------------
- * Use this approach when the response format is unknown or generic, for example:
- *  - A testing endpoint
- *  - A third-party API where the response structure may change
- *
- * Retrofit return type: Response<ResponseBody>
- *
- * Steps:
- * 1. Check if the HTTP response was successful using `response.isSuccessful`.
- * 2. If successful, extract the raw response body as a string:
- *      apiResult = response.body()?.string() ?: ""
- * 3. If not successful, handle the error by reading the HTTP status code:
- *      errorMessage = "Error code: ${response.code()}"
- *
- * Note:
- *  - `ResponseBody` gives the raw JSON or text from the server.
- *  - You can parse it manually later if needed (e.g., using Gson or kotlinx.serialization).
- */
