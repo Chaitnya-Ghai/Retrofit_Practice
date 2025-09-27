@@ -33,7 +33,7 @@ class MainActivity : ComponentActivity() {
                             body = "body of the post",
                             title = "title of the post"
                         )
-                        PostComposable({ apiService.postPosts(post) })
+                        PostComposable { apiService.postPosts(post) }
                     }
                 }
             }
