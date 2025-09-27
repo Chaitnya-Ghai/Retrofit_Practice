@@ -6,37 +6,24 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
+import retrofit2.http.Path
 
 interface ApiService {
-//---------------------------------------------------------------------------------
     /**
+     * Updates an existing post on the API using a PUT request.
      *
-     *     Keep the response as Response<ResponseBody> or Response<JsonElement>
-     *     until you know its structure.
-     *     */
-    @GET("posts")
-    suspend fun getPosts() : Response<ResponseBody>
-    /**
-     * @return [List]<[PostResponseItem]> representing the list of post items in the response.
-     */
-
-//---------------------------------------------------------------------------------
-    /**
-     * Sends a new post to the API using a POST request.
+     * Endpoint example : `posts/1`
      *
-     * @param post The [PostResponseItem] object containing the post data to upload.
-     * @return [Response]<[ResponseBody]> containing the server response after uploading the post.
-     *         Once the response structure is fully known, you can replace [ResponseBody]
-     *         with a more specific type if needed.
+     * The endpoint is `posts/{userId}`, where `userId` is dynamic and passed via [Path].
+     *@param post The [PostResponseItem] object containing the updated post data.
+     *@param userId The ID of the post/user to be updated.
+     *
      */
-    @POST("posts")
-    suspend fun postPosts(@Body post: PostResponseItem): Response<ResponseBody>
-    /**
-     * @return [PostResponseItem] representing a post item in the response.
-     *  */
-
-//---------------------------------------------------------------------------------
-
-
+    @PUT("posts/{userId}")
+    suspend fun putPost(
+        @Body post: PostResponseItem,
+        @Path("userId")userId : Int
+    ) : PostResponseItem
 
 }
