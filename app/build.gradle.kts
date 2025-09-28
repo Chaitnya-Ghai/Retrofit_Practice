@@ -59,4 +59,13 @@ dependencies {
 
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson.convertor)
+    implementation("com.squareup.okhttp3:okhttp:5.1.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:5.1.0")
+
+    testImplementation(libs.test.coroutines)
+    testImplementation(libs.mockito)
+    testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.mockwebserver)
+    testImplementation(kotlin("test"))
+
 }
