@@ -13,6 +13,16 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiServiceTest {
+    /**
+     * Real-APIs-are-unpredictable — they can be slow, unavailable, or change behavior without notice.
+     *
+     * [MockWebServer] solves this by:
+     * - Acting like a **fake API server** that runs locally during your tests.
+     * - Allowing you to **predefine responses** (status codes, headers, body) for given requests.
+     * - Enabling you to **verify and inspect outgoing requests** made by your app.
+     *
+     * This ensures your tests are **fast, reliable, and independent** of real network conditions.
+     */
 
     private lateinit var mockWebServer: MockWebServer
     private lateinit var apiService: ApiService
